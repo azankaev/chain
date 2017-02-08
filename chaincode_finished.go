@@ -51,7 +51,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("invoke is running " + function)
 		tosend := "Event Invoke"
-	err = stub.SetEvent("evtsender", []byte(tosend))
+	err := stub.SetEvent("evtsender", []byte(tosend))
 	if err != nil {
 		return nil, err
 	}
