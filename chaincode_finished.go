@@ -80,7 +80,7 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 	var key, value string
 	var err error
 	fmt.Println("running write()")
-logger.Panic("write logger.Panic ----------------------------------------")
+logger.Debug("write logger.Debug ----------------------------------------")
 	if len(args) != 2 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 2. name of the key and value to set")
 	}
@@ -102,7 +102,7 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting name of the key to query")
 	}
-logger.Panic("read logger.Panic ----------------------------------------")
+logger.Debug("read logger.Debug ----------------------------------------")
 	key = args[0]
 	valAsbytes, err := stub.GetState(key)
 	if err != nil {
