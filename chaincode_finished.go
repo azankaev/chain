@@ -105,6 +105,13 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 	}
 	logger.Infof("read logger.Infof ----------------------------------------")
 	fmt.Errorf("This is test log for (%s)", "read")
+	
+	tosend := "Event READ"
+	err = stub.SetEvent("evtsender", []byte(tosend))
+	if err != nil {
+		return nil, err
+	}
+	
 	key = args[0]
 	valAsbytes, err := stub.GetState(key)
 	if err != nil {
