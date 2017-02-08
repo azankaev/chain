@@ -41,11 +41,6 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	}
 	logger.Panicf("function Init. args count [%s]", len(args))
 	logger.Panicf("function Init. args[0] is [%s]", args[0])
-	var message string = "InitEvent"
-	err := stub.SetEvent("cevent", []byte(message))
-	if err != nil {
-		return nil, err
-	}
 
 	err := stub.PutState("hello_world", []byte(args[0]))
 	if err != nil {
@@ -60,11 +55,6 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	fmt.Println("invoke is running " + function)
 	logger.Panicf("function Invoke. args count [%s]", len(args))
 	logger.Panicf("function Invoke. args[0] is [%s]", args[0])
-		var message string = "InvokeEvent"
-	err := stub.SetEvent("cevent", []byte(message))
-	if err != nil {
-		return nil, err
-	}
 
 	// Handle different functions
 	if function == "init" {
@@ -82,11 +72,6 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	fmt.Println("query is running " + function)
 	logger.Panicf("function Query. args count [%s]", len(args))
 	logger.Panicf("function Query. args[0] is [%s]", args[0])
-	var message string = "QueryEvent"
-	err := stub.SetEvent("cevent", []byte(message))
-	if err != nil {
-		return nil, err
-	}
 
 	// Handle different functions
 	if function == "read" { //read a variable
@@ -104,11 +89,6 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 	fmt.Println("running write()")
 	logger.Panicf("function write. args count [%s]", len(args))
 	logger.Panicf("function write. args[0] is [%s]", args[0])
-	var message string = "writeEvent"
-	err := stub.SetEvent("cevent", []byte(message))
-	if err != nil {
-		return nil, err
-	}
 
 	if len(args) != 2 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 2. name of the key and value to set")
@@ -133,11 +113,6 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 	}
 	logger.Panicf("function read. args count [%s]", len(args))
 	logger.Panicf("function read. args[0] is [%s]", args[0])
-		var message string = readEvent"
-	err := stub.SetEvent("cevent", []byte(message))
-	if err != nil {
-		return nil, err
-	}
 
 	key = args[0]
 	valAsbytes, err := stub.GetState(key)
