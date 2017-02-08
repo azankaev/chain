@@ -50,6 +50,11 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 // Invoke isur entry point to invoke a chaincode function
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("invoke is running " + function)
+		tosend := "Event Invoke"
+	err = stub.SetEvent("evtsender", []byte(tosend))
+	if err != nil {
+		return nil, err
+	}
 
 	// Handle different functions
 	if function == "init" {
@@ -84,6 +89,11 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 	fmt.Errorf("This is test log for (%s)", "write")
 	if len(args) != 2 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 2. name of the key and value to set")
+	}
+	tosend := "Event write"
+	err = stub.SetEvent("evtsender", []byte(tosend))
+	if err != nil {
+		return nil, err
 	}
 
 	key = args[0] //rename for funsies
